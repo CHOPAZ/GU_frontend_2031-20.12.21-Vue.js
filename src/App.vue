@@ -1,23 +1,56 @@
 <template>
   <div id="app">
-    <div class="main">
+    <header>
       <img alt="Vue logo" src="./assets/logo.png">
-      <HelloWorld msg="Сalculator"/>
-      <VCalc/>
-    </div>
+      <h1>My personal coasts</h1>
+    </header>
+    <main>
+      <AddPaymentsList @add-payment="addPayment"/>
+      <PaymentsDisplay
+        :paymentsList="paymentsList"
+      />
+    </main>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-import VCalc from './components/VCalc.vue'
+import PaymentsDisplay from '@/components/PaymentsDisplay.vue'
+import AddPaymentsList from '@/components/AddPaymentsList.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld,
-    VCalc
+    AddPaymentsList,
+    PaymentsDisplay
+  },
+  data: () => ({
+    paymentsList: []
+  }),
+  methods: {
+    // fetchPaymentsData () {
+    //   return [
+    //     {
+    //       date: '28.03.2020',
+    //       category: 'Food',
+    //       value: 169
+    //     },
+    //     {
+    //       date: '24.03.2020',
+    //       category: 'Transport',
+    //       value: 360
+    //     },
+    //     {
+    //       date: '24.03.2020',
+    //       category: 'Food',
+    //       value: 532
+    //     }
+    //   ]
+    // },
+    addPayment (data) {
+      this.paymentsList.push(data)
+    }
   }
+
 }
 </script>
 
