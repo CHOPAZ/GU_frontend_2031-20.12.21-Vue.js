@@ -7,8 +7,8 @@
         <td>Category</td>
         <td>Value</td>
       </tr>
-      <tr v-for="({ date, category, value}, index) in paymentsList" :key="index">
-        <td>{{ index + 1 }}</td>
+      <tr v-for="({ id, date, category, value}, index) in paymentsList" :key="index">
+        <td>{{ id }}</td>
         <td>
           {{ date }}
         </td>

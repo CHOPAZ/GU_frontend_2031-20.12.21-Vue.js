@@ -12,7 +12,7 @@
       <PagiNation
         :currentPage="page"
         :amountPage="amountPage"
-        :length="paymentsList.length"
+        :length="12"
         @pagination="onChangePage"
       />
     </main>
@@ -35,7 +35,7 @@ export default {
   data () {
     return {
       page: 1,
-      amountPage: 5
+      amountPage: 3
     }
   },
   computed: {
@@ -54,10 +54,11 @@ export default {
     },
     onChangePage (numberPage) {
       this.page = numberPage
+      this.fetchData(this.page)
     }
   },
   created () {
-    this.fetchData()
+    this.fetchData(1)
   }
 
 }
