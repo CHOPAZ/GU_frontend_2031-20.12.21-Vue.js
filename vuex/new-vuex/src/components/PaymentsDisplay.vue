@@ -21,7 +21,6 @@
       </tr>
 
     </table>
-    <!--    <div class="dataTable" v-for="payment in paymentsList" :key="payment">{{ payment }}</div>-->
   </div>
 
 </template>
