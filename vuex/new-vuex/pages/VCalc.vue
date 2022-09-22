@@ -125,6 +125,9 @@ export default {
 </script>
 
 <style lang="scss">
+.main {
+  margin-top: 15px;
+}
 .error {
   margin-bottom: 10px;
   color: red;

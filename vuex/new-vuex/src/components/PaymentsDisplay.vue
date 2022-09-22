@@ -4,6 +4,7 @@
       <tr>
         <td>#</td>
         <td>Date</td>
+
         <td>Category</td>
         <td>Value</td>
       </tr>

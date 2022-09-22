@@ -27,17 +27,27 @@ export default {
   }),
   methods: {
     addPayment () {
-      const { value, category, date, currenDate } = this
+      const { value, category, date } = this
       const data = {
-        date: date || currenDate,
+        date: date || this.currenDate,
         category,
-        // date: date ? date : currenDate
+        // date: date ? date : currenDate,
         value
       }
       this.$emit('add-payment', data)
     },
     hideAddPayments () {
       this.showAddPayments = !this.showAddPayments
+    },
+    fillingCategory () {
+      if (this.$route.params.operation === 'add') {
+        this.showAddPayments = true
+      }
+      if (this.$route.params.category) {
+        this.category = this.$route.params.category
+      }
+      // this.category = this.$route.params.category
+      this.value = this.$route.query.value
     }
   },
   computed: {
@@ -49,6 +59,9 @@ export default {
 
       return `${day}.${month}.${year}`
     }
+  },
+  mounted () {
+    this.fillingCategory()
   }
 }
 </script>
