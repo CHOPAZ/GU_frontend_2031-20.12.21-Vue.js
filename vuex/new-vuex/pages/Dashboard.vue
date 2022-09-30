@@ -1,23 +1,23 @@
 <template>
   <div>
       <h1>My personal coasts</h1>
-      <AddPaymentsList @add-payment="addPayment"/>
-      <PaymentsDisplay
-        :paymentsList="currentElements"
+    <button @click="showAddForm">ADD NEW COSTS <span>+</span></button>
+    <PaymentsDisplay
+        :paymentsList="d_data"
+        @remove="onRemove"
       />
-      <PagiNation
-        :currentPage="page"
-        :amountPage="amountPage"
-        :length="12"
-        @pagination="onChangePage"
+    <PagiNation
+        :currentPage="1"
+        :amountPage="3"
+        :length="c_length"
+        v-model="d_data"
+        ref="pagination"
       />
   </div>
 </template>
 
 <script>
 import PaymentsDisplay from '@/components/PaymentsDisplay'
-import AddPaymentsList from '@/components/AddPaymentsList.vue'
-import { mapActions, mapGetters, mapMutations } from 'vuex'
 import PagiNation from '@/components/PagiNation'
 
 export default {
@@ -25,42 +25,39 @@ export default {
   name: 'Dashboard',
   components: {
     PagiNation,
-    AddPaymentsList,
     PaymentsDisplay
   },
   data () {
     return {
-      page: 1,
-      amountPage: 3
+      d_data: []
     }
   },
   computed: {
-    ...mapGetters(['paymentsList']),
-    // вывод 10-ти элементов на страницу
-    currentElements () {
-      const { amountPage, page } = this
-      return this.paymentsList.slice(
-        amountPage * (page - 1),
-        amountPage * (page - 1) + amountPage)
+    c_length () {
+      return this.$store.state.paymentsList.length || 0
     }
   },
   methods: {
-    ...mapActions(['fetchData']),
-    ...mapMutations(['ADD_PAYMENT_DATA']),
-    addPayment (data) {
-      this.ADD_PAYMENT_DATA(data)
+    showAddForm () {
+      this.$modal.show({
+        title: 'Add new costs',
+        content: 'AddPaymentsList'
+      })
     },
-    onChangePage (numberPage) {
-      this.page = numberPage
-      this.fetchData(this.page)
+    onRemove () {
+      this.$refs.pagination.currentElements()
     }
-  },
-  created () {
-    this.fetchData(1)
   }
 }
 </script>
 
-<style scoped>
-
+<style lang="scss">
+button {
+  background-color: aquamarine;
+  padding: 7px 15px;
+  border-width: 1px;
+  border-radius: 5px;
+  text-align: right;
+  cursor: pointer;
+}
 </style>

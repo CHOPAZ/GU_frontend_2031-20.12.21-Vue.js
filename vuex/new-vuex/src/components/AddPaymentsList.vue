@@ -1,16 +1,13 @@
 <template>
   <div class="paymentsForm">
-    <div class="showAddPayments">
-      <button @click="hideAddPayments">ADD NEW COSTS <span>+</span></button>
-    </div>
-    <div v-show="showAddPayments" class="form">
+    <div  class="form">
       <div class="inputForm">
-        <input type="text" placeholder="Amount" v-model="value">
-        <input type="text" placeholder="Type" v-model="category">
-        <input type="text" placeholder="Date" v-model="date">
+        <input type="text" placeholder="Amount" v-model="d_payment.value">
+        <input type="text" placeholder="Type" v-model="d_payment.category">
+        <input type="text" placeholder="Date" v-model="d_payment.date">
       </div>
       <div class="buttonControls">
-        <button @click="addPayment">Add <span>+</span></button>
+        <button @click="onSubmit">Save <span>+</span></button>
       </div>
     </div>
   </div>
@@ -19,38 +16,27 @@
 <script>
 export default {
   name: 'AddPaymentsList',
-  data: () => ({
-    value: '',
-    category: '',
-    date: '',
-    showAddPayments: false
-  }),
-  methods: {
-    addPayment () {
-      const { value, category, date } = this
-      const data = {
-        date: date || this.currenDate,
-        category,
-        // date: date ? date : currenDate,
-        value
-      }
-      this.$emit('add-payment', data)
-    },
-    hideAddPayments () {
-      this.showAddPayments = !this.showAddPayments
-    },
-    fillingCategory () {
-      if (this.$route.params.operation === 'add') {
-        this.showAddPayments = true
-      }
-      if (this.$route.params.category) {
-        this.category = this.$route.params.category
-      }
-      // this.category = this.$route.params.category
-      this.value = this.$route.query.value
+  props: {
+    payment: {
+      type: Object,
+      default: null
     }
   },
-  computed: {
+  data () {
+    return {
+      d_payment: {
+        value: null,
+        category: null,
+        date: null
+      }
+    }
+  },
+  beforeMount () {
+    if (this.payment) {
+      this.d_payment = { ...this.payment }
+    }
+  },
+  methods: {
     currenDate () {
       const currentDate = new Date()
       const day = currentDate.getDate()
@@ -58,6 +44,32 @@ export default {
       const year = currentDate.getFullYear()
 
       return `${day}.${month}.${year}`
+    },
+    onSubmit () {
+      this.d_payment.id ? this.editItem() : this.addPayment()
+    },
+    addPayment () {
+      if (!this.d_payment.date) {
+        this.d_payment.date = this.currenDate()
+      }
+      this.$emit('add-payment', this.d_payment)
+    },
+    editItem () {
+      if (!this.d_payment.date) {
+        this.d_payment.date = this.currenDate()
+      }
+      this.$emit('edit-payment', this.d_payment)
+    },
+    fillingCategory () {
+      // РАЗОБРАТЬСЯ С ЭТИМ
+      // if (this.$route.params.operation === 'add') {
+      //   // this.hideAddPayments()
+      //   this.showAddPayments = true
+      // }
+      if (this.$route.params.category) {
+        this.category = this.$route.params.category
+      }
+      this.value = this.$route.query.value
     }
   },
   mounted () {
@@ -71,14 +83,6 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-button {
-  background-color: aquamarine;
-  padding: 7px 15px;
-  border-width: 1px;
-  border-radius: 5px;
-  text-align: right;
 }
 
 span {

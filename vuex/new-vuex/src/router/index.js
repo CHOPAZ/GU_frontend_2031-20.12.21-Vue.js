@@ -1,9 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Dashboard from '../../pages/Dashboard'
-import About from '../../pages/About'
-import VCalc from '../../pages/VCalc'
-import NotFound from '../../pages/NotFound'
 
 Vue.use(VueRouter)
 
@@ -13,27 +9,27 @@ const router = new VueRouter({
     {
       path: '/dashboard',
       name: 'dashboard',
-      component: Dashboard
+      component: () => import(/* webpackChunkName: "Dashboard" */ '../../pages/Dashboard.vue')
     },
     {
       path: '/calculator',
       name: 'calculator',
-      component: VCalc
+      component: () => import(/* webpackChunkName: "Calculator" */ '../../pages/VCalc.vue')
     },
     {
       path: '/about',
       name: 'about',
-      component: About
+      component: () => import(/* webpackChunkName: "About" */ '../../pages/About.vue')
     },
     {
       path: '/404',
       name: 'NotFound',
-      component: NotFound
+      component: () => import(/* webpackChunkName: "NotFound" */ '../../pages/NotFound.vue')
     },
     {
       path: '/:operation/payment/:category/',
       name: 'addPayment',
-      component: Dashboard
+      component: () => import(/* webpackChunkName: "Dashboard" */ '../../pages/Dashboard.vue')
     },
     {
       path: '*',
@@ -43,6 +39,8 @@ const router = new VueRouter({
 })
 const getTitleByRouteName = routeName => {
   return {
+    addPayment: 'Add payment',
+    NotFound: '404',
     dashboard: 'Dashboard',
     calculator: 'Calculator',
     about: 'About'
