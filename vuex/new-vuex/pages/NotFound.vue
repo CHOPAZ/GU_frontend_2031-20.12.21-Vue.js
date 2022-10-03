@@ -1,7 +1,7 @@
 <template>
-<div>
-<h1>'Oops! Seems like we lost this page :(</h1>
-</div>
+  <div>
+    <h1>'Oops! Seems like we lost this page :(</h1>
+  </div>
 </template>
 
 <script>

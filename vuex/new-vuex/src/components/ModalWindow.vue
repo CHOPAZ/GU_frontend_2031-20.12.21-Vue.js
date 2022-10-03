@@ -1,18 +1,17 @@
 <template>
-<!-- В wrapper проверяем есть ли у нас такой компонент-->
   <div class="wrapper">
-      <div class="content">
-        <div class="header modalHeader">
-          <h3>{{ settings.title }}</h3>
-          <div class="modalHeader-close" @click="onCloseClick"></div>
-        </div>
-        <component :is="settings.content"
-                   @add-payment="addPayment"
-                   :payment="settings.payment"
-                   @edit-payment="editPayment"></component>
-<!--        <AddPaymentsList @add-payment="addPayment" v-if="componentName === 'AddPaymentsList'"/>-->
-<!--        <button @click="onCloseClick">Close</button> :payment="settings.payment"-->
+    <div class="content">
+      <div class="header modalHeader">
+        <h3>{{ settings.title }}</h3>
+        <div class="modalHeader-close"
+          @click="onCloseClick"></div>
       </div>
+      <component :is="settings.content"
+        @add-payment="addPayment"
+        :payment="settings.payment"
+        @edit-payment="editPayment">
+      </component>
+    </div>
   </div>
 </template>
 
@@ -59,17 +58,20 @@ export default {
   top: 0;
   left: 0;
 }
+
 .content {
   position: relative;
   background-color: #fff;
   border-radius: 8px;
   padding: 15px;
 }
+
 .modalHeader {
   display: flex;
   box-sizing: border-box;
   justify-content: space-between;
-  & > div {
+
+  &>div {
     background-image: url(/src/assets/clear.png);
     background-size: contain;
     width: 25px;
@@ -79,5 +81,4 @@ export default {
   }
 
 }
-
 </style>

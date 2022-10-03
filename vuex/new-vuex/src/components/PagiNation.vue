@@ -1,7 +1,8 @@
 <template>
   <div class="wrap">
     <div>
-      <i @click="onClick(curPage - 1)" class="arrow left"></i>
+      <i @click="onClick(curPage - 1)"
+        class="arrow left"></i>
     </div>
     <div
       v-for="page in amountPages"
@@ -12,7 +13,8 @@
       {{ page }}
     </div>
     <div>
-      <i @click="onClick(curPage + 1)" class="arrow right"></i>
+      <i @click="onClick(curPage + 1)"
+        class="arrow right"></i>
     </div>
   </div>
 </template>

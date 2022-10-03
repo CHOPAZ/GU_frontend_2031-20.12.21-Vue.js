@@ -2,9 +2,15 @@
   <div class="paymentsForm">
     <div  class="form">
       <div class="inputForm">
-        <input type="text" placeholder="Amount" v-model="d_payment.value">
-        <input type="text" placeholder="Type" v-model="d_payment.category">
-        <input type="text" placeholder="Date" v-model="d_payment.date">
+        <input type="text"
+          placeholder="Amount"
+          v-model="d_payment.value">
+        <input type="text"
+          placeholder="Type"
+          v-model="d_payment.category">
+        <input type="text"
+          placeholder="Date"
+          v-model="d_payment.date">
       </div>
       <div class="buttonControls">
         <button @click="onSubmit">Save <span>+</span></button>

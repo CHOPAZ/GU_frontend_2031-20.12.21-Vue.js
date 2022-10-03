@@ -1,10 +1,13 @@
 <template>
   <div class="main">
-    <div class="error" v-show="error">
+    <div class="error"
+      v-show="error">
       {{ error }}
     </div>
-    <input type="number" v-model.number="op1">
-    <input type="number" v-model.number="op2">
+    <input type="number"
+      v-model.number="op1">
+    <input type="number"
+      v-model.number="op2">
     = {{ result }}
     <div class="keyboard">
       <button
@@ -17,8 +20,9 @@
     </div>
     <div class="screenKeyboard">
       <div>
-        <!-- Подскажите зачем нужен :checked="showScreenKeyboards -->
-        <input type="checkbox" id="displayKeyboard" v-model="showScreenKeyboards">
+        <input type="checkbox"
+          id="displayKeyboard"
+          v-model="showScreenKeyboards">
         <label for="displayKeyboard">Show screen keyboard</label>
       </div>
       <div v-show="showScreenKeyboards">
@@ -32,9 +36,17 @@
           </button>
           <button @click="backSpace">BackSpace</button>
         </div>
-        <input type="radio" id="operand1" value="op1" name="operands" v-model="activeOperand">
+        <input type="radio"
+          id="operand1"
+          value="op1"
+          name="operands"
+          v-model="activeOperand">
         <label for="operand1">Operand 1</label>
-        <input type="radio" id="operand2" value="op2" name="operands" v-model="activeOperand">
+        <input type="radio"
+          id="operand2"
+          value="op2"
+          name="operands"
+          v-model="activeOperand">
         <label for="operand2">Operand 2</label>
       </div>
     </div>

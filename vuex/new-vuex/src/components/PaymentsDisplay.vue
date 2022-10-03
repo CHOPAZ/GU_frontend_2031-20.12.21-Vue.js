@@ -8,10 +8,10 @@
       <div class="paymets-display__header-item"></div>
     </div>
     <v-display-item class="paymets-display__item"
-                    v-for="(item, idx) in paymentsList"
-                    :key="idx"
-                    :item="item"
-                    @remove="$emit('remove')"
+      v-for="(item, idx) in paymentsList"
+      :key="idx"
+      :item="item"
+      @remove="$emit('remove')"
     />
   </div>
 

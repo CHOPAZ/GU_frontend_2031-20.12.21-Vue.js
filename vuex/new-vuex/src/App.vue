@@ -1,23 +1,26 @@
 <template>
-  <div id="app" class="app">
-    <header>
-      <img alt="Vue logo" src="../src/assets/logo.png">
-      <nav>
-        <router-link :to="{name: 'dashboard'}" class="router-link">Dashboard</router-link>
-        <router-link :to="{name: 'calculator'}" class="router-link">Calculate</router-link>
-        <router-link :to="{name: 'about'}" class="router-link">About</router-link>
-      </nav>
-    </header>
-    <main>
-      <router-view/>
-      <transition name="fade">
-        <ModalWindow
-          v-if="showModal"
-          :settings="modalSetting"
-        />
-      </transition>
-    </main>
-  </div>
+    <div id="app"
+         class="app">
+        <header>
+            <img alt="Vue logo"
+                 src="../src/assets/logo.png">
+            <nav>
+                <router-link :to="{name: 'dashboard'}"
+                             class="router-link">Dashboard</router-link>
+                <router-link :to="{name: 'calculator'}"
+                             class="router-link">Calculate</router-link>
+                <router-link :to="{name: 'about'}"
+                             class="router-link">About</router-link>
+            </nav>
+        </header>
+        <main>
+            <router-view />
+            <transition name="fade">
+                <ModalWindow v-if="showModal"
+                             :settings="modalSetting" />
+            </transition>
+        </main>
+    </div>
 </template>
 
 <script>
@@ -57,10 +60,12 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
+
 .app {
   max-width: 400px;
   margin: 0 auto;
 }
+
 .header {
   display: flex;
   flex-direction: row;
@@ -76,10 +81,14 @@ export default {
   border-radius: 5px;
   color: black;
 }
-.fade-enter-active, .fade-leave-active {
+
+.fade-enter-active,
+.fade-leave-active {
   transition: opacity .5s;
 }
-.fade-enter, .fade-leave-to {
+
+.fade-enter,
+.fade-leave-to {
   opacity: 0;
 }
 </style>

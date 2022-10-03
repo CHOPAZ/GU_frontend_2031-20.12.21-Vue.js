@@ -1,19 +1,24 @@
 <template>
-<div class="display-item">
-  <div class="display-item__field">{{item.id}}</div>
-  <div class="display-item__field">{{item.date}}</div>
-  <div class="display-item__field">{{item.category}}</div>
-  <div class="display-item__field">{{item.value}}</div>
-  <div class="display-item__field" v-click-outside="hide">
-    <i class="fa-solid fa-ellipsis-vertical" @click="d_showControls = !d_showControls"/>
+  <div class="display-item">
+    <div class="display-item__field">{{item.id}}</div>
+    <div class="display-item__field">{{item.date}}</div>
+    <div class="display-item__field">{{item.category}}</div>
+    <div class="display-item__field">{{item.value}}</div>
+    <div class="display-item__field"
+      v-click-outside="hide">
+      <i class="fa-solid fa-ellipsis-vertical"
+        @click="d_showControls = !d_showControls"/>
+    </div>
+    <transition name="fade" >
+      <ul class="display-item__dropdown"
+        v-if="d_showControls">
+        <li class="display-item__dropdown-item edit"
+          @click="edit"><i class="fa-solid fa-pencil"></i>Edit</li>
+        <li class="display-item__dropdown-item remove"
+          @click="remove"><i class="fa-solid fa-trash-can"></i>Remove</li>
+      </ul>
+    </transition>
   </div>
-  <transition name="fade" >
-  <ul class="display-item__dropdown" v-if="d_showControls">
-    <li class="display-item__dropdown-item edit" @click="edit"><i class="fa-solid fa-pencil"></i>Edit</li>
-    <li class="display-item__dropdown-item remove" @click="remove"><i class="fa-solid fa-trash-can"></i>Remove</li>
-  </ul>
-  </transition>
-</div>
 </template>
 
 <script>

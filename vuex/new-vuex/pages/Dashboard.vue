@@ -1,18 +1,18 @@
 <template>
   <div>
-      <h1>My personal coasts</h1>
+    <h1>My personal coasts</h1>
     <button @click="showAddForm">ADD NEW COSTS <span>+</span></button>
     <PaymentsDisplay
-        :paymentsList="d_data"
-        @remove="onRemove"
-      />
+      :paymentsList="d_data"
+      @remove="onRemove"
+    />
     <PagiNation
-        :currentPage="1"
-        :amountPage="3"
-        :length="c_length"
-        v-model="d_data"
-        ref="pagination"
-      />
+      :currentPage="1"
+      :amountPage="3"
+      :length="c_length"
+      v-model="d_data"
+      ref="pagination"
+    />
   </div>
 </template>
 
