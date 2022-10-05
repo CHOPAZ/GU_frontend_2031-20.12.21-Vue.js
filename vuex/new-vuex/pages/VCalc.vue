@@ -5,15 +5,18 @@
       {{ error }}
     </div>
     <input type="number"
-      v-model.number="op1">
+      v-model.number="op1"
+      name="op1">
     <input type="number"
-      v-model.number="op2">
+      v-model.number="op2"
+      name="op2">
     = {{ result }}
     <div class="keyboard">
       <button
         v-for="operation of operations"
         @click="calculate(operation)"
         :key="operation"
+        :name="operation"
       >
         {{ operation }}
       </button>
@@ -31,10 +34,14 @@
             v-for="Keyboard of digits"
             @click="keyboardClick(Keyboard)"
             :key="Keyboard"
+            :name="Keyboard"
           >
             {{ Keyboard }}
           </button>
-          <button @click="backSpace">BackSpace</button>
+          <button @click="backSpace"
+            name="backSpace"
+          >
+            BackSpace</button>
         </div>
         <input type="radio"
           id="operand1"
@@ -94,7 +101,7 @@ export default {
       const { op1, op2 } = this
       this.result = op1 - op2
     },
-    div: function () {
+    div () {
       const { op1, op2 } = this
       if (op2 === 0) {
         this.error = ' Sorry bro, you cant divide by zero :('
@@ -117,7 +124,7 @@ export default {
         return
       }
       this.result = Math.trunc(op1 / op2)
-    }, // Подскажите, непонятна запись this[this.activeOperand], как она называется правильно, почитаю
+    },
     keyboardClick (screenKeyboards) {
       const selectedOperandValue = this[this.activeOperand]
 

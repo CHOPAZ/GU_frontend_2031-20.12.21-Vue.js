@@ -23,6 +23,7 @@ module.exports = {
         max: 1
       }
     }],
+    // #comma-dangle Проверка  запятых:SS
     'comma-dangle': ['error', {
       arrays: 'never',
       objects: 'never',
@@ -46,5 +47,17 @@ module.exports = {
       'error',
       'always'
     ]
-  }
+  },
+  // убирает ошибку в тестовых файлах, не неопределенной переменной и наверно что-то еще
+  overrides: [
+    {
+      files: [
+        '**/__tests__/*.{j,t}s?(x)',
+        '**/tests/unit/**/*.test.{j,t}s?(x)'
+      ],
+      env: {
+        jest: true
+      }
+    }
+  ]
 }

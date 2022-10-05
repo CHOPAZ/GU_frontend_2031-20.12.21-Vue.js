@@ -1,30 +1,29 @@
 <template>
-    <div id="app"
-         class="app">
-        <header>
-            <img alt="Vue logo"
-                 src="../src/assets/logo.png">
-            <nav>
-                <router-link :to="{name: 'dashboard'}"
-                             class="router-link">Dashboard</router-link>
-                <router-link :to="{name: 'calculator'}"
-                             class="router-link">Calculate</router-link>
-                <router-link :to="{name: 'about'}"
-                             class="router-link">About</router-link>
-            </nav>
-        </header>
-        <main>
-            <router-view />
-            <transition name="fade">
-                <ModalWindow v-if="showModal"
-                             :settings="modalSetting" />
-            </transition>
-        </main>
-    </div>
+  <div id="app"
+    class="app">
+    <header>
+      <img alt="Vue logo"
+        src="../src/assets/logo.png">
+      <nav>
+        <router-link :to="{name: 'dashboard'}"
+          class="router-link">Dashboard</router-link>
+        <router-link :to="{name: 'calculator'}"
+          class="router-link">Calculate</router-link>
+        <router-link :to="{name: 'about'}"
+          class="router-link">About</router-link>
+      </nav>
+    </header>
+    <main>
+      <router-view />
+      <transition name="fade">
+        <ModalWindow v-if="showModal"
+          :settings="modalSetting" />
+      </transition>
+    </main>
+  </div>
 </template>
 
 <script>
-// import ModalWindow from '@/components/ModalWindow.vue'
 
 export default {
   name: 'App',
