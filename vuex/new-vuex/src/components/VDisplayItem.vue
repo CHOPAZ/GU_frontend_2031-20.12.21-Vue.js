@@ -1,24 +1,28 @@
 <template>
-  <div class="display-item">
-    <div class="display-item__field">{{item.id}}</div>
-    <div class="display-item__field">{{item.date}}</div>
-    <div class="display-item__field">{{item.category}}</div>
-    <div class="display-item__field">{{item.value}}</div>
-    <div class="display-item__field"
-      v-click-outside="hide">
-      <i class="fa-solid fa-ellipsis-vertical"
-        @click="d_showControls = !d_showControls"/>
-    </div>
+  <v-row class="display-item">
+    <v-col cols="1">{{item.id}}</v-col>
+    <v-col cols="4">{{item.date}}</v-col>
+    <v-col cols="4">{{item.category}}</v-col>
+    <v-col cols="2">{{item.value}}</v-col>
+    <v-col cols="1">
+      <div class="display-item__field"
+        v-click-outside="hide">
+        <i class="fa-solid fa-ellipsis-vertical"
+          @click="d_showControls = !d_showControls"/>
+      </div>
+    </v-col>
     <transition name="fade" >
       <ul class="display-item__dropdown"
         v-if="d_showControls">
         <li class="display-item__dropdown-item edit"
-          @click="edit"><i class="fa-solid fa-pencil"></i>Edit</li>
+          @click="edit"
+        >
+          <i class="fa-solid fa-pencil"></i>Edit</li>
         <li class="display-item__dropdown-item remove"
           @click="remove"><i class="fa-solid fa-trash-can"></i>Remove</li>
       </ul>
     </transition>
-  </div>
+  </v-row>
 </template>
 
 <script>
@@ -39,12 +43,11 @@ export default {
   },
   methods: {
     edit () {
-      this.$modal.show({ title: 'Edit', payment: { ...this.item }, content: 'AddPaymentsList' })
+      this.$emit('edit')
       this.d_showControls = false
     },
     remove () {
       this.$store.dispatch('removeItem', this.item.id)
-      this.$emit('remove')
       this.d_showControls = false
     },
     hide () {
@@ -59,52 +62,36 @@ export default {
 
 <style lang="scss">
 .display-item {
-  display: grid;
-  grid-template-columns: 10px 1fr 1fr 1fr auto;
-  gap: 20px;
   position: relative;
-  .display-item__field {
-    padding: 10px 0;
-    display: flex;
-    align-items: flex-start;
-  }
 }
 .display-item__dropdown {
   list-style: none;
   border: 1px solid black;
   border-radius: 10px;
   position: absolute;
-  margin: 0;
-  right: -20px;
+  margin: -10px;
+  right: 15px;
   top: 100%;
   background: white;
   z-index: 100;
-  padding: 0;
   box-shadow: 0 0 17px 0 #e7e7e7;
   .edit:hover {
     cursor: pointer;
-    background-color: aquamarine;
+    background-color: #009688;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
   }
   .remove:hover {
     cursor: pointer;
-    background-color: aquamarine;
+    background-color: #009688;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
   }
 
   .display-item__dropdown-item {
-    //width: 100%;
-    width: 100px;
+    width: 100%;
     text-align: start;
     padding: 10px;
-    //&:hover {
-    //  cursor: pointer;
-    //  background-color: aquamarine;
-    //  border-bottom-left-radius: 10px;
-    //  border-bottom-right-radius: 10px;
-    //}
   }
 }
 .fa-pencil, .fa-trash-can {
@@ -115,5 +102,8 @@ export default {
 }
 .fade-enter, .fade-leave-to {
   opacity: 0;
+}
+.v-application ul {
+  padding: 0;
 }
 </style>

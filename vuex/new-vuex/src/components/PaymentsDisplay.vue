@@ -1,20 +1,22 @@
 <template>
-  <div class="paymets-display">
-    <div class="paymets-display__header">
-      <div class="paymets-display__header-item">#</div>
-      <div class="paymets-display__header-item">Date</div>
-      <div class="paymets-display__header-item">Category</div>
-      <div class="paymets-display__header-item">Value</div>
-      <div class="paymets-display__header-item"></div>
-    </div>
-    <v-display-item class="paymets-display__item"
-      v-for="(item, idx) in paymentsList"
-      :key="idx"
-      :item="item"
-      @remove="$emit('remove')"
-    />
+  <div class="paymentsContent">
+    <v-row class="mt-4">
+      <v-col cols="1">#</v-col>
+      <v-col cols="4">Date</v-col>
+      <v-col cols="4">Category</v-col>
+      <v-col cols="2">Value</v-col>
+      <v-col cols="1"></v-col>
+    </v-row>
+    <v-row>
+      <v-col><v-display-item class="paymets-display__item"
+        v-for="(item, idx) in paymentsList"
+        :key="idx"
+        :item="item"
+        @edit="$emit('edit', item.id)"
+      />
+      </v-col>
+    </v-row>
   </div>
-
 </template>
 
 <script>
@@ -32,9 +34,7 @@ export default {
 </script>
 
 <style lang="scss">
-.dataTable {
-  margin-top: 10px;
-}
+
 .paymets-display {
   margin-top: 30px;
   margin-bottom: 10px;
@@ -49,10 +49,10 @@ export default {
     align-items: flex-start;
   }
 }
-
-.hatTable {
-  display: none;
+.paymentsContent{
+  height: 300px;
 }
+
 .fa-solid{
   cursor: pointer;
 }

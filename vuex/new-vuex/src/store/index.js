@@ -27,6 +27,7 @@ export default new Vuex.Store({
       const max = Math.max(...ids)
       payment.id = max + 1
       state.paymentsList.push(payment)
+      // state.paymentsList.splice(13, 1, payment)
     },
     removePayment (state, id) {
       const idx = state.paymentsList.findIndex((i) => i.id === id)
@@ -38,7 +39,8 @@ export default new Vuex.Store({
     }
   },
   getters: {
-    paymentsList: ({ paymentsList }) => paymentsList
+    paymentsList: ({ paymentsList }) => paymentsList,
+    getPaymentList: (state) => state.paymentsList
   },
   actions: {
     addItem (ctx, data) {

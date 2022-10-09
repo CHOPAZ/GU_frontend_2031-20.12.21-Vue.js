@@ -1,22 +1,13 @@
 <template>
-  <div class="paymentsForm">
-    <div  class="form">
-      <div class="inputForm">
-        <input type="text"
-          placeholder="Amount"
-          v-model="d_payment.value">
-        <input type="text"
-          placeholder="Type"
-          v-model="d_payment.category">
-        <input type="text"
-          placeholder="Date"
-          v-model="d_payment.date">
-      </div>
-      <div class="buttonControls">
-        <button @click="onSubmit">Save <span>+</span></button>
-      </div>
-    </div>
-  </div>
+  <v-card class="pa-8" v-show="showAddPayments">
+    <v-text-field v-model="d_payment.date"
+      label="Date"/>
+    <v-text-field v-model="d_payment.category"
+      label="Category"/>
+    <v-text-field v-model="d_payment.value"
+      label="Value"/>
+    <v-btn @click="onSubmit">Save <v-icon>mdi-plus</v-icon></v-btn>
+  </v-card>
 </template>
 
 <script>
@@ -34,7 +25,9 @@ export default {
         value: null,
         category: null,
         date: null
-      }
+      },
+      showAddPayments: true
+
     }
   },
   beforeMount () {
@@ -65,21 +58,7 @@ export default {
         this.d_payment.date = this.currenDate()
       }
       this.$emit('edit-payment', this.d_payment)
-    },
-    fillingCategory () {
-      // РАЗОБРАТЬСЯ С ЭТИМ
-      // if (this.$route.params.operation === 'add') {
-      //   // this.hideAddPayments()
-      //   this.showAddPayments = true
-      // }
-      if (this.$route.params.category) {
-        this.category = this.$route.params.category
-      }
-      this.value = this.$route.query.value
     }
-  },
-  mounted () {
-    this.fillingCategory()
   }
 }
 </script>

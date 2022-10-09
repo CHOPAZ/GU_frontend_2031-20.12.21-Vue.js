@@ -4,13 +4,25 @@
       v-show="error">
       {{ error }}
     </div>
-    <input type="number"
-      v-model.number="op1"
-      name="op1">
-    <input type="number"
-      v-model.number="op2"
-      name="op2">
-    = {{ result }}
+    <v-row>
+      <v-col cols="4">
+        <v-text-field type="number"
+          v-model.number="op1"
+          name="op1"
+          label="Operand 1">
+        </v-text-field>
+      </v-col>
+      <v-col cols="4">
+        <v-text-field type="number"
+          v-model.number="op2"
+          name="op2"
+          label="Operand 2">
+        </v-text-field>
+      </v-col>
+      <v-col cols="4">
+        = {{ result }}
+      </v-col>
+    </v-row>
     <div class="keyboard">
       <button
         v-for="operation of operations"
@@ -26,7 +38,7 @@
         <input type="checkbox"
           id="displayKeyboard"
           v-model="showScreenKeyboards">
-        <label for="displayKeyboard">Show screen keyboard</label>
+        <label for="displayKeyboard">  Show screen keyboard</label>
       </div>
       <div v-show="showScreenKeyboards">
         <div class="screenKeyboard__buttons">
@@ -65,9 +77,9 @@
 export default {
   name: 'VCalc',
   data: () => ({
-    op1: 0,
-    op2: 0,
-    result: 0,
+    op1: Number,
+    op2: Number,
+    result: Number(),
     error: '',
     operations: ['+', '-', '/', '*', 'Exponentiation', 'Integer division'],
     digits: [1, 2, 3, 4, 5, 6, 7, 8, 9, 0],
@@ -154,6 +166,11 @@ export default {
 
 .keyboard {
   padding-top: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  button:not(:last-child) {
+    margin-right: 5px;
+  }
 }
 
 .screenKeyboard {

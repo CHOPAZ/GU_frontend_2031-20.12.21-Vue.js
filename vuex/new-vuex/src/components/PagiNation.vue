@@ -1,26 +1,25 @@
 <template>
   <div class="wrap">
     <div>
-      <i @click="onClick(curPage - 1)"
+      <i @click="onClick(currentPage - 1)"
         class="arrow left"></i>
     </div>
     <div
       v-for="page in amountPages"
       :key="page"
       @click="onClick(page)"
-      :class="{active: page === curPage}"
+      :class="{active: page === currentPage}"
     >
       {{ page }}
     </div>
     <div>
-      <i @click="onClick(curPage + 1)"
+      <i @click="onClick(currentPage + 1)"
         class="arrow right"></i>
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 
 export default {
   name: 'PagiNation',
@@ -31,44 +30,22 @@ export default {
       default: 0
     },
     // кол-во выводимое на страницу
-    amountPage: {
+    perPage: {
       type: Number,
       default: 3
     },
-    // текущая страница
+    // Текущая страница
     currentPage: {
       type: Number,
       default: 1
-    },
-    value: {
-      type: Array,
-      required: true
-    }
-  },
-  data () {
-    return {
-      // для правильного отображения текущей страницы
-      curPage: this.currentPage
     }
   },
   computed: {
     // получение кол-ва страниц
     amountPages () {
-      const { length, amountPage } = this
-      return Math.ceil(length / amountPage)
-    },
-    c_value: {
-      get () {
-        return this.value
-      },
-      set (val) {
-        this.$emit('input', val)
-      }
-    },
-    ...mapGetters(['paymentsList'])
-  },
-  beforeMount () {
-    this.currentElements()
+      const { length, perPage } = this
+      return Math.ceil(length / perPage)
+    }
   },
   methods: {
     // проверка на какой мы странице
@@ -76,16 +53,9 @@ export default {
       if (numberPage < 1 || numberPage > this.amountPages) {
         return
       }
-      this.curPage = numberPage
-      this.currentElements()
-    },
-    currentElements () {
-      const { amountPage, curPage } = this
-      this.c_value = this.paymentsList.slice(
-        amountPage * (curPage - 1),
-        amountPage * (curPage - 1) + amountPage)
-    }
 
+      this.$emit('change-page', numberPage)
+    }
   }
 }
 </script>
@@ -98,8 +68,9 @@ export default {
     padding: 10px;
     cursor: pointer;
     &.active {
-      background-color: aquamarine;
+      background-color: #009688;
       border-radius: 5px;
+      color: white;
     }
   }
 

@@ -17,10 +17,10 @@ module.exports = {
     // #vue/max-attributes-per-line Проверка на максимальное количество атрибутов в строке:
     'vue/max-attributes-per-line': ['error', {
       singleline: {
-        max: 1
+        max: 3
       },
       multiline: {
-        max: 1
+        max: 3
       }
     }],
     // #comma-dangle Проверка  запятых:SS
